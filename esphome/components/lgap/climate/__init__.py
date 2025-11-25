@@ -9,6 +9,8 @@ from .. import (
     LGAP,
     CONF_LGAP_ID
 )
+lgap_ns = cg.esphome_ns.namespace("lgap")
+LGAPHVACClimate = lgap_ns.class_("LGAPHVACClimate", climate.Climate, cg.Component)
 
 DEPENDENCIES = ["lgap"]
 CODEOWNERS = ["@jourdant"]
@@ -18,7 +20,7 @@ LGAP_HVAC_Climate = lgap_ns.class_("LGAPHVACClimate", cg.Component, climate.Clim
 CONF_ZONE_NUMBER = "zone"
 CONF_TEMPERATURE_PUBISH_TIME = "temperature_publish_time"
 
-CONFIG_SCHEMA = climate.CLIMATE_SCHEMA.extend(
+CONFIG_SCHEMA = climate.climate_schema(LGAPHVACClimate).extend(
     {
         cv.GenerateID(): cv.declare_id(LGAP_HVAC_Climate),
         cv.GenerateID(CONF_LGAP_ID): cv.use_id(LGAP),
